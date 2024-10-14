@@ -20,7 +20,7 @@ func FetchCategoriesHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the template for the <option> elements
 	tmpl, err := template.New("categories").Parse(`
 		{{range .}}
-			<option value="{{.ID}}">{{.Name}}</option>
+			<option value="{{.ID}}">{{.EnName}}</option>
 		{{end}}
 	`)
 	if err != nil {
