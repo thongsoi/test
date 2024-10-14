@@ -7,16 +7,9 @@ import (
 	"github.com/thongsoi/test/models"
 )
 
-// Assuming you have a Category struct
-/*
-type Category struct {
-	ID   int
-	Name string
-}
-*/
-
 func FetchCategories(db *sql.DB) ([]models.Category, error) {
-	rows, err := db.Query("SELECT id, name FROM categories")
+	// Order by category name in ascending order
+	rows, err := db.Query("SELECT id, en_name FROM categories ORDER BY id ASC")
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +18,7 @@ func FetchCategories(db *sql.DB) ([]models.Category, error) {
 	var categories []models.Category
 	for rows.Next() {
 		var category models.Category
-		err := rows.Scan(&category.ID, &category.Name)
+		err := rows.Scan(&category.ID, &category.EnName)
 		if err != nil {
 			log.Println(err)
 			continue

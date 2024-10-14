@@ -16,7 +16,7 @@ func main() {
 	r := mux.NewRouter()
 
 	// Define the route for fetching categories
-	r.HandleFunc("/fetch-categories", handler.FetchCategoriesHandler).Methods("GET")
+	r.HandleFunc("/fetch-categories", handler.FetchCategoriesHandler).Methods("GET", "POST")
 
 	// Serve the HTML file (e.g., form.html) at the root URL
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
