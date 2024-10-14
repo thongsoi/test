@@ -9,10 +9,10 @@
 </head>
 <body>
 
-    <h2>Select a Category</h2>
+    <h2>Please select a market category you want to buy/sell</h2>
     <form method="POST" action="/submit-category">
         <div>
-            <label for="category">Category</label>
+            <label for="category">Market category</label>
             <!-- The select will be rendered with Go template engine -->
             <select id="category" name="category">
                 {{range .Categories}}
