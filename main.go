@@ -13,14 +13,11 @@ func main() {
 
 	r := mux.NewRouter()
 
-	// Route for fetching categories (HTMX)
-	r.HandleFunc("/fetch-categories", handler.FetchCategoriesHandler).Methods("GET")
+	// Route for rendering the form (GET)
+	r.HandleFunc("/", handler.FormHandler).Methods("GET")
 
-	// Route for form submission
+	// Route for form submission (POST)
 	r.HandleFunc("/submit-category", handler.SubmitCategoryHandler).Methods("POST")
-
-	// Serve the HTML file (e.g., form.html)
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
 	http.ListenAndServe(":9000", r)
 }

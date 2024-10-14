@@ -13,9 +13,11 @@
     <form method="POST" action="/submit-category">
         <div>
             <label for="category">Category</label>
-            <!-- The select will be populated by HTMX -->
-            <select id="category" name="category" hx-get="/fetch-categories" hx-trigger="load">
-                <!-- HTMX will inject the fetched options here -->
+            <!-- The select will be rendered with Go template engine -->
+            <select id="category" name="category">
+                {{range .Categories}}
+                    <option value="{{.ID}}">{{.EnName}}</option>
+                {{end}}
             </select>
         </div>
         <button type="submit">Submit</button>
