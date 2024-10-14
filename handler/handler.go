@@ -1,29 +1,34 @@
-package test
+package handler
 
 import (
 	"html/template"
 	"log"
 	"net/http"
-	"path"
-
-	"github.com/thongsoi/biomassx/database"
+	"your_project/db"         // Import your database connection
+	"your_project/repository" // Import your repository package
 )
 
-func OptionsHandler(w http.ResponseWriter, r *http.Request) {
-	// Fetch the data from PostgreSQL
-	db := database.InitDB() // Replace with your DB instance
-	options, err := FetchOptions(db)
+func FetchCategoriesHandler(w http.ResponseWriter, r *http.Request) {
+	// Get categories from the database
+	categories, err := repository.FetchCategories(db.GetDB())
 	if err != nil {
-		http.Error(w, "Unable to fetch options", http.StatusInternalServerError)
+		http.Error(w, "Unable to fetch categories", http.StatusInternalServerError)
 		return
 	}
 
-	// Use a simple template to render the options
-	tmpl, err := template.ParseFiles(path.Join("templates", "options.html"))
+	// Parse the template for the <option> elements
+	tmpl, err := template.New("categories").Parse(`
+		{{range .}}
+			<option value="{{.ID}}">{{.Name}}</option>
+		{{end}}
+	`)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Serve the template with options data
-	tmpl.Execute(w, options)
+	// Execute the template with the fetched categories
+	err = tmpl.Execute(w, categories)
+	if err != nil {
+		http.Error(w, "Unable to render template", http.StatusInternalServerError)
+	}
 }

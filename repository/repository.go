@@ -1,32 +1,32 @@
-package test
+package repository
 
 import (
 	"database/sql"
 	"log"
 )
 
-// Fetch options from PostgreSQL
-func FetchOptions(db *sql.DB) ([]Option, error) {
-	var options []Option
+// Assuming you have a Category struct
+type Category struct {
+	ID   int
+	Name string
+}
 
-	query := `SELECT id, name FROM options_table`
-	rows, err := db.Query(query)
+func FetchCategories(db *sql.DB) ([]Category, error) {
+	rows, err := db.Query("SELECT id, name FROM categories")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
+	var categories []Category
 	for rows.Next() {
-		var option Option
-		if err := rows.Scan(&option.ID, &option.Name); err != nil {
-			log.Fatal(err)
+		var category Category
+		err := rows.Scan(&category.ID, &category.Name)
+		if err != nil {
+			log.Println(err)
+			continue
 		}
-		options = append(options, option)
+		categories = append(categories, category)
 	}
-
-	if err = rows.Err(); err != nil {
-		return nil, err
-	}
-
-	return options, nil
+	return categories, nil
 }

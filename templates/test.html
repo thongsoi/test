@@ -1,6 +1,9 @@
-<form>
-    <label for="option-select">Choose an option:</label>
-    <select id="option-select" name="option" hx-get="/options" hx-target="#option-select" hx-trigger="load">
-        <!-- HTMX will load options here -->
-    </select>
+<form method="POST" action="/submit-form">
+    <div>
+        <label for="category">Category</label>
+        <select id="category" name="category" hx-get="/fetch-categories" hx-trigger="load">
+            <!-- HTMX will inject the fetched options here -->
+        </select>
+    </div>
+    <button type="submit">Submit</button>
 </form>
