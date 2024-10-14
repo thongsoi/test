@@ -9,10 +9,11 @@
 </head>
 <body>
 
-    <form method="POST" action="/submit-form">
+    <h2>Select a Category</h2>
+    <form method="POST" action="/submit-category">
         <div>
             <label for="category">Category</label>
-                <!-- The select will be populated by HTMX -->
+            <!-- The select will be populated by HTMX -->
             <select id="category" name="category" hx-get="/fetch-categories" hx-trigger="load">
                 <!-- HTMX will inject the fetched options here -->
             </select>

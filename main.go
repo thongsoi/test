@@ -4,23 +4,23 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/thongsoi/test/database" // Import your db package
-	"github.com/thongsoi/test/handler"  // Import your handler package
+	"github.com/thongsoi/test/database"
+	"github.com/thongsoi/test/handler"
 )
 
 func main() {
-	// Initialize the database connection
 	database.InitDB()
 
-	// Create a new router
 	r := mux.NewRouter()
 
-	// Define the route for fetching categories
-	r.HandleFunc("/fetch-categories", handler.FetchCategoriesHandler).Methods("GET", "POST")
+	// Route for fetching categories (HTMX)
+	r.HandleFunc("/fetch-categories", handler.FetchCategoriesHandler).Methods("GET")
 
-	// Serve the HTML file (e.g., form.html) at the root URL
+	// Route for form submission
+	r.HandleFunc("/submit-category", handler.SubmitCategoryHandler).Methods("POST")
+
+	// Serve the HTML file (e.g., form.html)
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
-	// Start the server on port 8080
 	http.ListenAndServe(":9000", r)
 }

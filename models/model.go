@@ -1,6 +1,6 @@
 package models
 
 type Category struct {
-	ID     int
-	EnName string
+	ID     int    // db: id
+	EnName string // db: en_name
 }
