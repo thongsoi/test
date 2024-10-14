@@ -12,7 +12,7 @@
     <h2>Please select a market category you want to buy/sell</h2>
     <form method="POST" action="/submit-category">
         <div>
-            <label for="category">Market category</label>
+            <label for="category">Market</label>
             <!-- The select will be rendered with Go template engine -->
             <select id="category" name="category">
                 {{range .Categories}}
@@ -20,6 +20,18 @@
                 {{end}}
             </select>
         </div>
+        <div>
+            <label for="category">Submarket</label>
+            <!-- The select will be rendered with Go template engine -->
+            <select id="category" name="category">
+                {{range .Categories}}
+                    <option value="{{.ID}}">{{.EnName}}</option>
+                {{end}}
+            </select>
+        </div>
+
+
+
         <button type="submit">Submit</button>
     </form>
 
