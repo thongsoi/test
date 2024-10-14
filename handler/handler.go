@@ -5,9 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/thongsoi/test/database"
+	"github.com/thongsoi/test/database"   // Import your database connection
 	"github.com/thongsoi/test/repository" // Import your repository package
-	// Import your database connection
 )
 
 func FetchCategoriesHandler(w http.ResponseWriter, r *http.Request) {

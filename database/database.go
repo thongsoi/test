@@ -12,7 +12,7 @@ var db *sql.DB
 // InitDB initializes a global DB connection
 func InitDB() *sql.DB {
 	var err error
-	dsn := "postgres://dev1:dev1pg@localhost:5432/biomassx" // your connection string
+	dsn := "postgres://dev1:dev1pg@localhost:5432/biomassx?sslmode=disable" // your connection string
 	db, err = sql.Open("postgres", dsn)
 	if err != nil {
 		log.Fatal("Error connecting to the database:", err)
