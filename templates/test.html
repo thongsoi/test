@@ -1,9 +1,24 @@
-<form method="POST" action="/submit-form">
-    <div>
-        <label for="category">Category</label>
-        <select id="category" name="category" hx-get="/fetch-categories" hx-trigger="load">
-            <!-- HTMX will inject the fetched options here -->
-        </select>
-    </div>
-    <button type="submit">Submit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form with HTMX</title>
+    <!-- Include HTMX CDN -->
+    <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body>
+
+    <form method="POST" action="/submit-form">
+        <div>
+            <label for="category">Category</label>
+                <!-- The select will be populated by HTMX -->
+            <select id="category" name="category" hx-get="/fetch-categories" hx-trigger="load">
+                <!-- HTMX will inject the fetched options here -->
+            </select>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>

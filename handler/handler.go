@@ -4,13 +4,15 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"your_project/db"         // Import your database connection
-	"your_project/repository" // Import your repository package
+
+	"github.com/thongsoi/test/database"
+	"github.com/thongsoi/test/repository" // Import your repository package
+	// Import your database connection
 )
 
 func FetchCategoriesHandler(w http.ResponseWriter, r *http.Request) {
 	// Get categories from the database
-	categories, err := repository.FetchCategories(db.GetDB())
+	categories, err := repository.FetchCategories(database.GetDB())
 	if err != nil {
 		http.Error(w, "Unable to fetch categories", http.StatusInternalServerError)
 		return
