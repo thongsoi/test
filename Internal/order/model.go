@@ -1,4 +1,4 @@
-package models
+package order
 
 type Category struct {
 	ID     int    // db: id

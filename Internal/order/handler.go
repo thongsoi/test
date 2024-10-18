@@ -1,4 +1,4 @@
-package handler
+package order
 
 import (
 	"fmt"
@@ -8,12 +8,10 @@ import (
 	"strconv"
 
 	"github.com/thongsoi/test/database"
-	"github.com/thongsoi/test/models"
-	"github.com/thongsoi/test/repository"
 )
 
 func FormHandler(w http.ResponseWriter, r *http.Request) {
-	categories, err := repository.FetchCategories(database.GetDB())
+	categories, err := FetchCategories(database.GetDB())
 	if err != nil {
 		http.Error(w, "Unable to fetch categories", http.StatusInternalServerError)
 		return
@@ -27,7 +25,7 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Pass categories to the template
 	data := struct {
-		Categories []models.Category
+		Categories []Category
 	}{
 		Categories: categories,
 	}
