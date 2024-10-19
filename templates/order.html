@@ -2,34 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order</title>
-    <!-- Include HTMX CDN -->
+    <title>Create Order</title>
     <script src="https://unpkg.com/htmx.org@2.0.3"></script>
 </head>
 <body>
-    <header class="header">  
-        <h1>BiomassX</h1>
-        <h4>bioenergy exchange platform</h4>
-    </header>
-    <nav class="navigator">
-        <a href="/dashboard">Home</a> | <a href="/logout" hx-post="/logout" hx-redirect="/login">Logout</a>
-    </nav>
-    <main class="content">
-        <h2>Order</h2>
-        <form hx-post="/order" hx-target="#response" hx-swap="innerHTML">
-            <label for="marketID">Market</label>
-            <!-- The select will be rendered with Go template engine -->
-            <select id="marketID" name="marketID">
-                {{range .Markets}}
-                    <option value="{{.ID}}">{{.EnName}}</option>
-                {{end}}
-            </select><br>
-            <button type="submit">Submit</button>
-        </form>
-    </main>
-    <footer>
-
-    </footer>
+    <form action="/submit-order" method="POST">
+        <label for="market">Select Market:</label>
+        <select id="market" name="marketID" hx-get="/markets" hx-target="#market" hx-trigger="load">
+            <option value="">Select a Market</option>
+            {{range .Markets}}
+            <option value="{{.ID}}">{{.EnName}}</option>
+            {{end}}
+        </select>
+<br>
+        <label for="submarket">Select Submarket:</label>
+        <select id="submarket" name="submarketID" hx-get="/submarkets?marketID={marketID}" hx-target="#submarket" hx-trigger="change">
+            <option value="">Select a Submarket</option>
+            {{range .Submarkets}}
+            <option value="{{.ID}}">{{.EnName}}</option>
+            {{end}}
+        </select>
+<br>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

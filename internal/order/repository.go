@@ -6,7 +6,7 @@ import (
 )
 
 func FetchMarkets(db *sql.DB) ([]Market, error) {
-	// Order by maket name in ascending order
+	// Order by market name in ascending order
 	rows, err := db.Query("SELECT id, en_name FROM markets ORDER BY id ASC")
 	if err != nil {
 		return nil, err
@@ -24,6 +24,27 @@ func FetchMarkets(db *sql.DB) ([]Market, error) {
 		markets = append(markets, market)
 	}
 	return markets, nil
+}
+
+func FetchSubmarkets(db *sql.DB) ([]Submarket, error) {
+	// Order by submaket name in ascending order
+	rows, err := db.Query("SELECT id, en_name FROM submarkets ORDER BY id ASC")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var submarkets []Submarket
+	for rows.Next() {
+		var submaket Submarket
+		err := rows.Scan(&submaket.ID, &submaket.EnName)
+		if err != nil {
+			log.Println(err)
+			continue
+		}
+		submarkets = append(submarkets, submaket)
+	}
+	return submarkets, nil
 }
 
 /*
