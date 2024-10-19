@@ -7,23 +7,27 @@
 </head>
 <body>
     <form action="/submit-order" method="POST">
-        <label for="market">Select Market:</label>
+        
+        <label for="market">Market:</label>
         <select id="market" name="marketID" hx-get="/markets" hx-target="#market" hx-trigger="load">
-            <option value="">Select a Market</option>
+            <option value="">--Select a market--</option>
             {{range .Markets}}
             <option value="{{.ID}}">{{.EnName}}</option>
             {{end}}
         </select>
-<br>
-        <label for="submarket">Select Submarket:</label>
+        <br>
+        
+        <label for="submarket">Submarket:</label>
         <select id="submarket" name="submarketID" hx-get="/submarkets?marketID={marketID}" hx-target="#submarket" hx-trigger="change">
-            <option value="">Select a Submarket</option>
+            <option value="">--Select a submarket--</option>
             {{range .Submarkets}}
             <option value="{{.ID}}">{{.EnName}}</option>
             {{end}}
         </select>
-<br>
-        <button type="submit">Submit</button>
+        <br>
+        
+        <button type="submit">Submit Order</button>
+
     </form>
 </body>
 </html>

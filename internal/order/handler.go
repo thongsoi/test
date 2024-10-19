@@ -47,7 +47,7 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func SubmitMarketIDHandler(w http.ResponseWriter, r *http.Request) {
+func SubmitOrderHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return

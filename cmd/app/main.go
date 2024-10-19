@@ -15,7 +15,7 @@ func main() {
 
 	// Route for form submission (POST)
 	r.HandleFunc("/", order.FormHandler).Methods("GET")
-	r.HandleFunc("/order", order.SubmitMarketIDHandler).Methods("POST")
+	r.HandleFunc("/order", order.SubmitOrderHandler).Methods("POST")
 
 	http.ListenAndServe(":9000", r)
 }
